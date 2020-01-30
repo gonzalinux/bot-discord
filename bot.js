@@ -18,7 +18,7 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
-    // el evento de encender lanza las funciones principales del otro archivo
+    // el evento de encender al recibir mensaje lanza las funciones principales del otro archivo
 
    let func=require("./Funciones");
    func.main(user,userID,channelID,message,bot);
