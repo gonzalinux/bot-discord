@@ -7,7 +7,7 @@ logger.add(new logger.transports.Console, {
     colorize: true
 });
 logger.level = 'debug';
-// Initialize Discord Bot
+//Iniciar el bot
 var bot = new Discord.Client({
     token: auth.token,
     autorun: true
@@ -18,46 +18,9 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
-    if (message.substring(0, 3) == 'fi ') {
-        var args = message.substring(3).split(' ');
-        var cmd = args[0];
-        var klk =args[1];
-        var tamano=args.length;
-        bot.sendMessage({
-            to: channelID,
-            message: diasemana()+'jkwdkjad'
-        });
-        args = args.splice(1);
-        switch(cmd) {
-            // !ping
-            case 'ping':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
-                });
-                break;
-            case 'klk':
-                if(klk== "manin"){
-                bot.sendMessage({
-                    to: channelID,
-                    message: tamano
-                })};break
-            // Just add any case commands if you want to..
-        }
-    }
+    // el evento de encender lanza las funciones principales del otro archivo
+
+   let func=require("./Funciones");
+   func.main(user,userID,channelID,message,bot);
+
 });
-function diasemana() {
-    var fecha=new Date();
-
-    fecha.setHours(fecha.getUTCHours()+12);
-    var dia=fecha.getTime();
-
-    var anio=fecha.getFullYear();
-    fecha.setMonth(11);
-    fecha.setDate(8);
-    var dias=["dom","lun", "mar", "mie", "jue", "vie", "sab"];
-    return "Dia de la semana : " + dias[fecha.getDay()];
-
-}
